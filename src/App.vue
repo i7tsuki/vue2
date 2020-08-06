@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Step1 :stepNum = 1 v-if="stepNum === 1"/>
-    <Step2 :stepNum = 2 v-if="stepNum === 2"/>
-    <Step3 :stepNum = 3 v-if="stepNum === 3"/>
+    <Step1 v-if="this.$store.state.stepNum === 1"/>
+    <Step2 v-if="this.$store.state.stepNum === 2"/>
+    <Step3 v-if="this.$store.state.stepNum === 3"/>
   </div>
 </template>
 
@@ -17,11 +17,6 @@ export default {
     Step1, 
     Step2, 
     Step3, 
-  }, 
-  data: function() {
-    return {
-      stepNum: 1
-    }
   }
 }
 
