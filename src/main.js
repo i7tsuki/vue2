@@ -8,7 +8,7 @@ Vue.use(Vuex)
 Vue.use(VueRouter)
 
 const store = new Vuex.Store({
-	state: {
+  state: {
     gender: null,
     yearOfBirth: null,
     monthOfBirth: null,
