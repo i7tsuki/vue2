@@ -5,7 +5,7 @@
         <div>STEP3</div>
         <div>ご相談内容をご記入ください</div>
         <p>-ご相談内容-</p>
-        <textarea></textarea>
+        <textarea v-model="consultationContent"></textarea>
         <p>
           <button v-on:click="prevQuestion">前へ戻る</button>
           <button v-on:click="nextQuestion">次へ進む</button>
@@ -18,12 +18,22 @@
 <script>
 export default {
   name: 'Step3',
+  data: function() {
+    return {
+      consultationContent: this.$store.state.consultationContent,
+    }
+  },
   methods: {
+    setState: function() {
+      this.$store.state.consultationContent = this.consultationContent;
+    }, 
     prevQuestion: function() {
-      this.$store.commit('StepNumDecrement');
+      this.setState();
+      this.$router.push('/step2');
     },
     nextQuestion: function() {
-      this.$store.commit('StepNumIncrement');
+      this.setState();
+      alert('実装していないため、次に進むことができません。');
     }
   }
 }

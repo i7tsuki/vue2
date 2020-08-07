@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <Step1 v-if="this.$store.state.stepNum === 1"/>
-    <Step2 v-if="this.$store.state.stepNum === 2"/>
-    <Step3 v-if="this.$store.state.stepNum === 3"/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -13,13 +11,30 @@ import Step3 from './components/Step3.vue'
 
 export default {
   name: 'App',
-  components: {
-    Step1, 
-    Step2, 
-    Step3, 
-  }
+  routes: [
+    {
+      path: '/',
+      redirect: {
+        name: 'step1'
+      }
+    },
+    {
+      path: '/step1',
+      name: 'step1',
+      component: Step1,
+    },
+    {
+      path: '/step2',
+      name: 'step2',
+      component: Step2,
+    },
+    {
+      path: '/step3',
+      name: 'step3',
+      component: Step3,
+    },
+  ]
 }
-
 </script>
 
 <style>

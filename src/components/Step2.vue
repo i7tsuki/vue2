@@ -5,20 +5,20 @@
         <div>STEP2</div>
         <div>以下にお答えください</div>
         <p>現在、生命保険に加入されていますか？</p>
-        <label><input type="radio" name="life-insurance" value="yes" v-model="isHospital">はい</label>
-        <label><input type="radio" name="life-insurance" value="no" v-model="isHospital">いいえ</label>
+        <label><input type="radio" name="having-life-insurance" value="yes" v-model="havingLifeInsurance">はい</label>
+        <label><input type="radio" name="having-life-insurance" value="no" v-model="havingLifeInsurance">いいえ</label>
         <transition>
-          <div v-if="isHospital">
+          <div v-if="havingLifeInsurance">
             <p>現在入院中ですか。または、最近3ヵ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？</p>
-            <label><input type="radio" name="hospitalization" value="yes" v-model="isLastFiveYears">はい</label>
-            <label><input type="radio" name="hospitalization" value="no" v-model="isLastFiveYears">いいえ</label>
+            <label><input type="radio" name="hospitalization" value="yes" v-model="hospitalization">はい</label>
+            <label><input type="radio" name="hospitalization" value="no" v-model="hospitalization">いいえ</label>
           </div>
         </transition>
         <transition>
-          <div v-if="isLastFiveYears">
+          <div v-if="hospitalization">
             <p>過去5年以内に、病気やけがで、手術をうけたことまたは継続して7日以上の入院をしたことがありますか？</p>
-            <label><input type="radio" name="last-five-years" value="yes">はい</label>
-            <label><input type="radio" name="last-five-years" value="no">いいえ</label>
+            <label><input type="radio" name="last-five-years" value="yes" v-model="lastFiveYears">はい</label>
+            <label><input type="radio" name="last-five-years" value="no" v-model="lastFiveYears">いいえ</label>
           </div>
         </transition>
         <p>
@@ -35,16 +35,24 @@ export default {
   name: 'Step2',
   data: function() {
     return {
-      isHospital: false,
-      isLastFiveYears: false
+      havingLifeInsurance: this.$store.state.havingLifeInsurance,
+      hospitalization: this.$store.state.hospitalization,
+      lastFiveYears: this.$store.state.lastFiveYears,
     }
   },
   methods: {
+    setState: function() {
+      this.$store.state.havingLifeInsurance = this.havingLifeInsurance;
+      this.$store.state.hospitalization = this.hospitalization;
+      this.$store.state.lastFiveYears = this.lastFiveYears;
+    },
     prevQuestion: function() {
-      this.$store.commit('StepNumDecrement');
+      this.setState();
+      this.$router.push('/step1')
     },
     nextQuestion: function() {
-      this.$store.commit('StepNumIncrement');
+      this.setState();
+      this.$router.push('/step3')
     }
   }
 }
