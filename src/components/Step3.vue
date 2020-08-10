@@ -24,15 +24,16 @@ export default {
     }
   },
   methods: {
-    setState: function() {
-      this.$store.state.consultationContent = this.consultationContent;
-    }, 
     prevQuestion: function() {
-      this.setState();
+      this.$store.commit('setStateStep3', {
+        consultationContent: this.consultationContent
+      });
       this.$router.push('/step2');
     },
     nextQuestion: function() {
-      this.setState();
+      this.$store.commit('setStateStep3', {
+        consultationContent: this.consultationContent
+      });
       alert('実装していないため、次に進むことができません。');
     }
   }

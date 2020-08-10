@@ -41,17 +41,16 @@ export default {
     }
   },
   methods: {
-    setState: function() {
-      this.$store.state.havingLifeInsurance = this.havingLifeInsurance;
-      this.$store.state.hospitalization = this.hospitalization;
-      this.$store.state.lastFiveYears = this.lastFiveYears;
-    },
     prevQuestion: function() {
-      this.setState();
+      this.$store.commit('setStateStep2', {
+        havingLifeInsurance: this.havingLifeInsurance, hospitalization: this.hospitalization, lastFiveYears: this.lastFiveYears
+      });
       this.$router.push('/step1')
     },
     nextQuestion: function() {
-      this.setState();
+      this.$store.commit('setStateStep2', {
+        havingLifeInsurance: this.havingLifeInsurance, hospitalization: this.hospitalization, lastFiveYears: this.lastFiveYears
+      });
       this.$router.push('/step3')
     }
   }

@@ -40,11 +40,11 @@ export default {
     }
     return {
       years: yearData,
-      days: 0,
       gender: this.$store.state.gender,
       inputYear: this.$store.state.yearOfBirth, 
       inputMonth: this.$store.state.monthOfBirth,
       inputDay: this.$store.state.dateOfBirth, 
+      days: this.$store.state.dateOfBirth,
     }
   },
   watch: {
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     setDays: function() {
-      if (this.inputYear === '' || this.inputMonth === '') {
+      if (this.inputYear === '' || this.inputMonth === '' || this.inputYear === null || this.inputMonth === null) {
         this.days = 0;
         return;
       }
@@ -68,16 +68,15 @@ export default {
       const datesOfYear= [31, datesOfFebruary, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
       this.days = datesOfYear[month-1];
     }, 
-    setState: function() {
-      this.$store.state.gender = this.gender;
-      this.$store.state.yearOfBirth = this.inputYear;
-      this.$store.state.monthOfBirth = this.inputMonth;
-      this.$store.state.dateOfBirth = this.inputDay;
-    }, 
     nextQuestion: function() {
-      this.setState();
+      this.$store.commit('setStateStep1', {
+        gender:this.gender, inputYear: this.inputYear, inputMonth: this.inputMonth, inputDay: this.inputDay
+      });
       this.$router.push('/step2');
-    }
+    },
+  },
+  created: function () {
+    this.setDays();
   } 
 }
 </script>
