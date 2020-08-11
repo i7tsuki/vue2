@@ -20,18 +20,18 @@ const store = new Vuex.Store({
   },
   mutations: {
     setStateStep1(state, argument) {
-      state.gender = argument['gender'];
-      state.yearOfBirth = argument['inputYear'];
-      state.monthOfBirth = argument['inputMonth'];
-      state.dateOfBirth = argument['inputDay'];
+      state.gender = argument.gender;
+      state.yearOfBirth = argument.inputYear;
+      state.monthOfBirth = argument.inputMonth;
+      state.dateOfBirth = argument.inputDay;
     }, 
     setStateStep2(state, argument) {
-      state.havingLifeInsurance = argument['havingLifeInsurance'];
-      state.hospitalization = argument['hospitalization'];
-      state.lastFiveYears = argument['lastFiveYears'];
+      state.havingLifeInsurance = argument.havingLifeInsurance;
+      state.hospitalization = argument.hospitalization;
+      state.lastFiveYears = argument.lastFiveYears;
     }, 
     setStateStep3(state, argument) {
-      state.consultationContent = argument['consultationContent'];
+      state.consultationContent = argument.consultationContent;
     }, 
   }, 
 });
